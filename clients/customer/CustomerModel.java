@@ -73,7 +73,7 @@ public class CustomerModel extends Observable
         if ( pr.getQuantity() >= amount )       //  In stock?
         { 
           theAction =                           //   Display 
-            String.format( "%s : %7.2f (%2d) ", //
+            String.format( "%s : £ %7.2f (%2d) ", //
               pr.getDescription(),              //    description
               pr.getPrice(),                    //    price
               pr.getQuantity() );               //    quantity

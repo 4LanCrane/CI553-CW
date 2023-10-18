@@ -11,6 +11,8 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
+
+
 /**
  * Implements the Customer view.
  * @author  Mike Smith University of Brighton
@@ -29,8 +31,11 @@ public class CustomerView implements Observer
   private static final int W = 500;       // Width  of window pixels
 
   private final JLabel      theAction  = new JLabel();
+
+  private final JLabel      theInputLabel  = new JLabel("Please enter the product number:"); //label for input
   private final JTextField  theInput   = new JTextField();
 
+  private final JLabel      theAmountLabel  = new JLabel("Quantity"); //label for input
   private final JTextArea   theAmount  = new JTextArea();
   private final JTextArea   theOutput  = new JTextArea();
   private final JScrollPane theSP      = new JScrollPane();
@@ -76,16 +81,23 @@ public class CustomerView implements Observer
       e -> cont.doClear() );
     cp.add( theBtClear );                           //  Add to canvas
 
-    theAction.setBounds( 110, 25 , 270, 20 );       // Message area
+    theAction.setBounds( 110, 10 , 270, 20 );       // Message area
     theAction.setText( "" );                        //  Blank
+    theAction.setFont(new Font("Serif", Font.PLAIN, 16));
     cp.add( theAction );                            //  Add to canvas
 
+
+
+    theInputLabel.setBounds( 110, 34 , 270, 20 );// label Prompt for product no
+    cp.add( theInputLabel );
     theInput.setBounds( 110, 50, 270, 40 );         // Product no area
     theInput.setText("");                           // Blank
     cp.add( theInput );
 
-    theAmount.setBounds(390,50,50,60);
-    theAmount.setText("");
+    theAmountLabel.setBounds( 390, 34 , 270, 20 );// label Prompt for product no
+    cp.add( theAmountLabel );
+    theAmount.setBounds(390,50,50,20);
+    theAmount.setText("1");
     cp.add(theAmount);
     
     theSP.setBounds( 110, 100, 270, 160 );          // Scrolling pane
