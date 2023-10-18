@@ -26,7 +26,7 @@ public class CustomerView implements Observer
   }
 
   private static final int H = 300;       // Height of window pixels
-  private static final int W = 400;       // Width  of window pixels
+  private static final int W = 500;       // Width  of window pixels
 
   private final JLabel      theAction  = new JLabel();
   private final JTextField  theInput   = new JTextField();
@@ -84,7 +84,7 @@ public class CustomerView implements Observer
     theInput.setText("");                           // Blank
     cp.add( theInput );
 
-    theAmount.setBounds(110,65,270,60);
+    theAmount.setBounds(390,50,50,60);
     theAmount.setText("");
     cp.add(theAmount);
     

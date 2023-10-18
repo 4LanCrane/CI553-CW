@@ -63,7 +63,7 @@ public class CustomerModel extends Observable
   {
     theBasket.clear();                          // Clear s. list
     String theAction = "";
-    pn  = productNum.trim();                    // Product no.
+    pn  = productNum.trim();// Product no.
     pAmount = amount;                        //  & quantity
     try
     {
