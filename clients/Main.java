@@ -1,4 +1,7 @@
 package clients;
+import clients.Catalogue.CatalogueController;
+import clients.Catalogue.CatalogueModel;
+import clients.Catalogue.CatalogueView;
 import clients.backDoor.BackDoorController;
 import clients.backDoor.BackDoorModel;
 import clients.backDoor.BackDoorView;
@@ -52,6 +55,7 @@ class Main
     startCustomerGUI_MVC( mlf );
     if ( many ) 
      startCustomerGUI_MVC( mlf );
+    startCatalogueGUI_MVC( mlf );
     startCashierGUI_MVC( mlf );
     startCashierGUI_MVC( mlf );
     startBackDoorGUI_MVC( mlf );
@@ -79,6 +83,27 @@ class Main
     model.addObserver( view );       // Add observer to the model
     window.setVisible(true);         // start Screen
   }
+
+
+
+  public void startCatalogueGUI_MVC(MiddleFactory mlf )
+  {
+    JFrame  window = new JFrame();
+    window.setTitle( "Catalogue Client MVC");
+    window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+    Dimension pos = PosOnScrn.getPos();
+
+    CatalogueModel model      = new CatalogueModel(mlf);
+    CatalogueView view        = new CatalogueView( window, mlf, pos.width, pos.height );
+    CatalogueController cont  = new CatalogueController( model, view );
+    view.setController( cont );
+
+    model.addObserver( view );       // Add observer to the model
+    window.setVisible(true);         // start Screen
+  }
+
+
+
 
   /**
    * start the cashier client

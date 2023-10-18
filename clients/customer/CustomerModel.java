@@ -23,6 +23,8 @@ public class CustomerModel extends Observable
 
   private String      pn = "";                    // Product being processed
 
+  private int pAmount= 0;
+
   private StockReader     theStock     = null;
   private OrderProcessing theOrder     = null;
   private ImageIcon       thePic       = null;
@@ -57,12 +59,12 @@ public class CustomerModel extends Observable
    * Check if the product is in Stock
    * @param productNum The product number
    */
-  public void doCheck(String productNum )
+  public void doCheck(String productNum,int amount )
   {
     theBasket.clear();                          // Clear s. list
     String theAction = "";
     pn  = productNum.trim();                    // Product no.
-    int    amount  = 1;                         //  & quantity
+    pAmount = amount;                        //  & quantity
     try
     {
       if ( theStock.exists( pn ) )              // Stock Exists?

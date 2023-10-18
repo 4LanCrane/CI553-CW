@@ -108,6 +108,12 @@ public class StockR implements StockReader
     }
   }
 
+
+
+
+
+
+
   /**
    * Returns details about the product in the stock list.
    *  Assumed to exist in database.
@@ -140,6 +146,37 @@ public class StockR implements StockReader
       throw new StockException( "SQL getDetails: " + e.getMessage() );
     }
   }
+
+
+
+  /**
+   a function to return all items from the database
+   */
+  public synchronized Product getAllProducts( )
+          throws StockException
+  {
+    try
+    {
+      Product   dt = new Product( "0", "", 0.00, 0 );
+      ResultSet rs = getStatementObject().executeQuery(
+              "select *" +
+                      "  from ProductTable, StockTable "
+      );
+      if ( rs.next() )
+      {
+        dt.setProductNum( rs.getString( "productNo" ) );
+        dt.setDescription(rs.getString( "description" ) );
+        dt.setPrice( rs.getDouble( "price" ) );
+        dt.setQuantity( rs.getInt( "stockLevel" ) );
+      }
+      rs.close();
+      return dt;
+    } catch ( SQLException e )
+    {
+      throw new StockException( "SQL getDetails: " + e.getMessage() );
+    }
+  }
+
 
   /**
    * Returns 'image' of the product

@@ -20,6 +20,10 @@ public interface StockReader
    * @throws StockException if issue
    */
   boolean exists(String pNum) throws StockException;
+
+
+
+
          
   /**
    * Returns details about the product in the stock list
@@ -29,6 +33,11 @@ public interface StockReader
    */
   
   Product getDetails(String pNum) throws StockException;
+
+
+
+
+
   
   
   /**
@@ -39,4 +48,6 @@ public interface StockReader
    */
   
   ImageIcon getImage(String pNum) throws StockException;
+
+
 }

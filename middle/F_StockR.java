@@ -68,6 +68,8 @@ public class F_StockR implements StockReader
     }
   }
 
+
+
   /**
    * Returns details about the product in the stock list
    * @return StockNumber, Description, Price, Quantity
@@ -87,8 +89,11 @@ public class F_StockR implements StockReader
       throw new StockException( "Net: " + e.getMessage() );
     }
   }
-  
-  
+
+
+
+
+
   public synchronized ImageIcon getImage( String number )
          throws StockException
   {
