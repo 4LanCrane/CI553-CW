@@ -36,7 +36,7 @@ public class CustomerView implements Observer
   private final JTextField  theInput   = new JTextField();
 
   private final JLabel      theAmountLabel  = new JLabel("Quantity"); //label for input
-  private final JTextArea   theAmount  = new JTextArea();
+  private final JSpinner theAmount = new JSpinner(new SpinnerNumberModel(1, 1, 50, 1));
   private final JTextArea   theOutput  = new JTextArea();
   private final JScrollPane theSP      = new JScrollPane();
   private final JButton     theBtCheck = new JButton( Name.CHECK );
@@ -73,7 +73,7 @@ public class CustomerView implements Observer
 
     theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check button
     theBtCheck.addActionListener(                   // Call back code
-      e -> cont.doCheck( theInput.getText(), Integer.parseInt(theAmount.getText())) );
+      e -> cont.doCheck( theInput.getText(), Integer.parseInt(String.valueOf(theAmount.getValue()))) );
     cp.add( theBtCheck );                           //  Add to canvas
 
     theBtClear.setBounds( 16, 25+60*1, 80, 40 );    // Clear button
@@ -97,7 +97,6 @@ public class CustomerView implements Observer
     theAmountLabel.setBounds( 390, 34 , 270, 20 );// label Prompt for product no
     cp.add( theAmountLabel );
     theAmount.setBounds(390,50,50,20);
-    theAmount.setText("1");
     cp.add(theAmount);
     
     theSP.setBounds( 110, 100, 270, 160 );          // Scrolling pane
