@@ -18,7 +18,7 @@ import java.util.Observer;
 public class CashierView implements Observer
 {
   private static final int H = 300;       // Height of window pixels
-  private static final int W = 400;       // Width  of window pixels
+  private static final int W = 500;       // Width  of window pixels
   
   private static final String CHECK  = "Check";
   private static final String BUY    = "Buy";
@@ -31,6 +31,9 @@ public class CashierView implements Observer
   private final JButton     theBtCheck = new JButton( CHECK );
   private final JButton     theBtBuy   = new JButton( BUY );
   private final JButton     theBtBought= new JButton( BOUGHT );
+
+  private final JLabel      theAmountLabel  = new JLabel("Quantity"); //label for input
+  private final JSpinner theAmount = new JSpinner(new SpinnerNumberModel(1, 1, 50, 1));
 
   private StockReadWriter theStock     = null;
   private OrderProcessing theOrder     = null;
@@ -64,7 +67,7 @@ public class CashierView implements Observer
 
     theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check Button
     theBtCheck.addActionListener(                   // Call back code
-      e -> cont.doCheck( theInput.getText() ) );
+      e -> cont.doCheck( theInput.getText(),Integer.parseInt(String.valueOf(theAmount.getValue()))));
     cp.add( theBtCheck );                           //  Add to canvas
 
     theBtBuy.setBounds( 16, 25+60*1, 80, 40 );      // Buy button 
@@ -83,7 +86,12 @@ public class CashierView implements Observer
 
     theInput.setBounds( 110, 50, 270, 40 );         // Input Area
     theInput.setText("");                           // Blank
-    cp.add( theInput );                             //  Add to canvas
+    cp.add( theInput );
+
+    theAmountLabel.setBounds( 390, 34 , 270, 20 );// label Prompt for product no
+    cp.add( theAmountLabel );
+    theAmount.setBounds(390,50,50,20);
+    cp.add(theAmount);//  Add to canvas
 
     theSP.setBounds( 110, 100, 270, 160 );          // Scrolling pane
     theOutput.setText( "" );                        //  Blank

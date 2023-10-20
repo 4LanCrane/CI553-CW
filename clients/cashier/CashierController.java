@@ -24,11 +24,11 @@ public class CashierController
 
   /**
    * Check interaction from view
-   * @param pn The product number to be checked
+   * @param pn The product number to be checked and the int amount to be passed to the model do check function
    */
-  public void doCheck( String pn )
+  public void doCheck( String pn, int amount)
   {
-    model.doCheck(pn);
+    model.doCheck(pn,amount);
   }
 
    /**
