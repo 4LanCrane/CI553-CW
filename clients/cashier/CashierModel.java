@@ -132,9 +132,17 @@ public class CashierModel extends Observable
   }
 
 
-  void doClearBasket()
+  public void doClearBasket()
   {
-    theBasket.clear();                        // Clear s. list
+    theBasket.clear(); //clear basket ArrayList
+    String action =""; // clear action for new customer
+  action = "Next customer"; //set action to next customer
+  theState = State.process; //change state to process
+  setChanged(); // check for changes on observed object
+  notifyObservers(action); //notify observers of action
+
+
+
   }
 
 

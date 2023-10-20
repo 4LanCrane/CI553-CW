@@ -1,6 +1,7 @@
 package clients.cashier;
 
 import catalogue.Basket;
+import clients.customer.CustomerView;
 import middle.MiddleFactory;
 import middle.OrderProcessing;
 import middle.StockReadWriter;
@@ -24,12 +25,16 @@ public class CashierView implements Observer
   private static final String BUY    = "Buy";
   private static final String BOUGHT = "Bought";
 
+  private static final String CLEAR = "Clear";
+
   private final JLabel      theAction  = new JLabel();
   private final JTextField  theInput   = new JTextField();
   private final JTextArea   theOutput  = new JTextArea();
   private final JScrollPane theSP      = new JScrollPane();
   private final JButton     theBtCheck = new JButton( CHECK );
   private final JButton     theBtBuy   = new JButton( BUY );
+  private final JButton     theBtClear = new JButton( CLEAR);
+
   private final JButton     theBtBought= new JButton( BOUGHT );
 
   private final JLabel      theAmountLabel  = new JLabel("Quantity"); //label for input
@@ -74,6 +79,11 @@ public class CashierView implements Observer
     theBtBuy.addActionListener(                     // Call back code
       e -> cont.doBuy() );
     cp.add( theBtBuy );                             //  Add to canvas
+
+    theBtClear.setBounds( 16, 25+60*2, 80, 40 );    // Clear Button
+    theBtClear.addActionListener(                   // Call back code
+      e -> cont.doClear() );
+    cp.add( theBtClear );                           //  Add to canvas
 
     theBtBought.setBounds( 16, 25+60*3, 80, 40 );   // Clear Button
     theBtBought.addActionListener(                  // Call back code
