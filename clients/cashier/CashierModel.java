@@ -132,21 +132,25 @@ public class CashierModel extends Observable
   }
 
 
-  public void doClearBasket()
-  {
-    theBasket.clear(); //clear basket ArrayList
-    String action =""; // clear action for new customer
-  action = "Next customer"; //set action to next customer
-  theState = State.process; //change state to process
-  setChanged(); // check for changes on observed object
-  notifyObservers(action); //notify observers of action
+  public void doClearBasket() {
+    try {
+      for (Product pr : theBasket) {
+        theStock.addStock(pr.getProductNum(), pr.getQuantity());
 
+      }
+        theBasket=null; //clear basket ArrayList
+        String action = ""; // clear action for new customer
+        action = "Next customer"; //set action to next customer
+        theState = State.process; //change state to process
+        setChanged(); // check for changes on observed object
+        notifyObservers(action); //notify observers of action
 
-
+    } catch (StockException e) {
+      DEBUG.error("%s\n%s",
+              "CashierModel.doBuy", e.getMessage());
+      e.getMessage();
+    }
   }
-
-
-  
   /**
    * Customer pays for the contents of the basket
    */
