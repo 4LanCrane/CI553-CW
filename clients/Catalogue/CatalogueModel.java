@@ -56,8 +56,12 @@ public class CatalogueModel extends Observable
     /**
      * Check if the product is in Stock
      * @param productName The product number
+
      */
-    public void doCheck(String productName )
+
+
+
+    public void doCheckByName(String productName )
     {
         theBasket.clear();                          // Clear s. list
         String theAction = "";
@@ -65,9 +69,9 @@ public class CatalogueModel extends Observable
         int    amount  = 1;                         //  & quantity
         try
         {
-            if ( theStock.exists( pn ) )              // Stock Exists?
+            if ( theStock.existsByName( pn ) )              // Stock Exists?
             {                                         // T
-                Product pr = theStock.getDetails( pn ); //  Product
+                Product pr = theStock.getDetailsByName( pn ); //  Product
                 if ( pr.getQuantity() >= amount )       //  In stock?
                 {
                     theAction =                           //   Display

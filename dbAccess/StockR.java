@@ -109,7 +109,25 @@ public class StockR implements StockReader
   }
 
 
+  public synchronized boolean existsByName( String pDesc )
+          throws StockException
+  {
 
+    try
+    {
+      ResultSet rs   = getStatementObject().executeQuery(
+              "select price from ProductTable " +
+                      "  where  ProductTable.description = '" + pDesc + "'"
+      );
+      boolean res = rs.next();
+      DEBUG.trace( "DB StockR: exists(%s) -> %s",
+              pDesc, ( res ? "T" : "F" ) );
+      return res;
+    } catch ( SQLException e )
+    {
+      throw new StockException( "SQL exists: " + e.getMessage() );
+    }
+  }
 
 
 
@@ -136,6 +154,32 @@ public class StockR implements StockReader
       {
         dt.setProductNum( pNum );
         dt.setDescription(rs.getString( "description" ) );
+        dt.setPrice( rs.getDouble( "price" ) );
+        dt.setQuantity( rs.getInt( "stockLevel" ) );
+      }
+      rs.close();
+      return dt;
+    } catch ( SQLException e )
+    {
+      throw new StockException( "SQL getDetails: " + e.getMessage() );
+    }
+  }
+
+  public synchronized Product getDetailsByName( String pNum )
+          throws StockException
+  {
+    try
+    {
+      Product   dt = new Product( "0", "", 0.00, 0 );
+      ResultSet rs = getStatementObject().executeQuery(
+              "select * " +
+                      "  from ProductTable, StockTable " +
+                      "  where  ProductTable.description LIKE '" + pNum + "' "
+      );
+      if ( rs.next() )
+      {
+        dt.setProductNum(rs.getInt( "productNo" ) + "");
+        dt.setDescription(pNum);
         dt.setPrice( rs.getDouble( "price" ) );
         dt.setQuantity( rs.getInt( "stockLevel" ) );
       }

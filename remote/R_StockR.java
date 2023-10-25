@@ -41,6 +41,12 @@ public class      R_StockR
     return aStockR.exists( pNum );
   }
 
+  public synchronized boolean existsByName( String pNum )
+          throws RemoteException, StockException
+  {
+    return aStockR.existsByName( pNum );
+  }
+
   /**
    * Returns details about the product in the stock list
    * @param pNum The product number
@@ -51,7 +57,14 @@ public class      R_StockR
   {
     return aStockR.getDetails( pNum );
   }
-  
+
+
+  public synchronized Product getDetailsByName( String pNum )
+          throws RemoteException, StockException
+  {
+    return aStockR.getDetailsByName( pNum );
+  }
+
   /**
    * Returns an image of the product
    * BUG However this will not work for distributed version

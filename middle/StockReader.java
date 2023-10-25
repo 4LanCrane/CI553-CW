@@ -22,6 +22,7 @@ public interface StockReader
   boolean exists(String pNum) throws StockException;
 
 
+  boolean existsByName(String pDesc) throws StockException;
 
 
          
@@ -34,8 +35,7 @@ public interface StockReader
   
   Product getDetails(String pNum) throws StockException;
 
-
-
+  Product getDetailsByName(String pDesc) throws StockException;
 
 
   
