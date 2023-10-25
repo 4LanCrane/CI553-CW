@@ -107,14 +107,14 @@ public class F_StockR implements StockReader
   }
 
 
-  public synchronized Product getDetailsByName( String number )
+  public synchronized Product getDetailsByName( String name )
           throws StockException
   {
     DEBUG.trace("F_StockR:getDetails()" );
     try
     {
       if ( aR_StockR == null ) connect();
-      return aR_StockR.getDetailsByName( number );
+      return aR_StockR.getDetailsByName( name );
     } catch ( RemoteException e )
     {
       aR_StockR = null;
