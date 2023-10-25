@@ -117,7 +117,7 @@ public class StockR implements StockReader
     {
       ResultSet rs   = getStatementObject().executeQuery(
               "select price from ProductTable " +
-                      "  where  ProductTable.description = '" + pDesc + "'"
+                      "  where  ProductTable.description LIKE '%" + pDesc + "%'"
       );
       boolean res = rs.next();
       DEBUG.trace( "DB StockR: exists(%s) -> %s",
@@ -174,12 +174,12 @@ public class StockR implements StockReader
       ResultSet rs = getStatementObject().executeQuery(
               "select * " +
                       "  from ProductTable, StockTable " +
-                      "  where  ProductTable.description LIKE '" + pNum + "' "
+                      "  where  ProductTable.description LIKE '%" + pNum + "%' "
       );
       if ( rs.next() )
       {
         dt.setProductNum(rs.getInt( "productNo" ) + "");
-        dt.setDescription(pNum);
+        dt.setDescription(rs.getString( "description" ));
         dt.setPrice( rs.getDouble( "price" ) );
         dt.setQuantity( rs.getInt( "stockLevel" ) );
       }
