@@ -9,6 +9,7 @@ import middle.RemoteMiddleFactory;
 
 import javax.swing.*;
 
+
 /**
  * The standalone Customer Client
  * @author  Mike Smith University of Brighton

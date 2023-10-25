@@ -19,11 +19,11 @@ import java.util.Observer;
 public class CashierView implements Observer
 {
   private static final int H = 300;       // Height of window pixels
-  private static final int W = 500;       // Width  of window pixels
-  
+  private static final int W = 470;       // Width  of window pixels
+
   private static final String CHECK  = "Check";
-  private static final String BUY    = "Buy";
-  private static final String BOUGHT = "Bought";
+  private static final String ADD    = "ADD";
+  private static final String BUY = "BUY";
 
   private static final String CLEAR = "Clear";
 
@@ -32,10 +32,10 @@ public class CashierView implements Observer
   private final JTextArea   theOutput  = new JTextArea();
   private final JScrollPane theSP      = new JScrollPane();
   private final JButton     theBtCheck = new JButton( CHECK );
-  private final JButton     theBtBuy   = new JButton( BUY );
+  private final JButton     theBtBuy   = new JButton( ADD );
   private final JButton     theBtClear = new JButton( CLEAR);
 
-  private final JButton     theBtBought= new JButton( BOUGHT );
+  private final JButton     theBtBought= new JButton( BUY );
 
   private final JLabel      theAmountLabel  = new JLabel("Quantity"); //label for input
   private final JSpinner theAmount = new JSpinner(new SpinnerNumberModel(1, 1, 50, 1));
@@ -98,9 +98,9 @@ public class CashierView implements Observer
     theInput.setText("");                           // Blank
     cp.add( theInput );
 
-    theAmountLabel.setBounds( 390, 34 , 270, 20 );// label Prompt for product no
+    theAmountLabel.setBounds( 390, 25 , 270, 20 );// label Prompt for product no
     cp.add( theAmountLabel );
-    theAmount.setBounds(390,50,50,20);
+    theAmount.setBounds(380,50,60,40);
     cp.add(theAmount);//  Add to canvas
 
     theSP.setBounds( 110, 100, 270, 160 );          // Scrolling pane

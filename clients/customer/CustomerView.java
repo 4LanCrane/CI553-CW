@@ -28,7 +28,7 @@ public class CustomerView implements Observer
   }
 
   private static final int H = 300;       // Height of window pixels
-  private static final int W = 500;       // Width  of window pixels
+  private static final int W = 470;       // Width  of window pixels
 
   private final JLabel      theAction  = new JLabel();
 
@@ -76,7 +76,7 @@ public class CustomerView implements Observer
       e -> cont.doCheck( theInput.getText(), Integer.parseInt(String.valueOf(theAmount.getValue()))) );
     cp.add( theBtCheck );                           //  Add to canvas
 
-    theBtClear.setBounds( 16, 25+60*1, 80, 40 );    // Clear button
+    theBtClear.setBounds( 16, 25+60*1, 80, 40 );// Clear button
     theBtClear.addActionListener(                   // Call back code
       e -> cont.doClear() );
     cp.add( theBtClear );                           //  Add to canvas
@@ -94,10 +94,10 @@ public class CustomerView implements Observer
     theInput.setText("");                           // Blank
     cp.add( theInput );
 
-    theAmountLabel.setBounds( 390, 34 , 270, 20 );// label Prompt for product no
+    theAmountLabel.setBounds( 390, 25 , 270, 20 );// label Prompt for product no
     cp.add( theAmountLabel );
-    theAmount.setBounds(390,50,50,20);
-    cp.add(theAmount);
+    theAmount.setBounds(380,50,60,40);
+    cp.add(theAmount);//  Add to canvas
     
     theSP.setBounds( 110, 100, 270, 160 );          // Scrolling pane
     theOutput.setText( "" );                        //  Blank
