@@ -11,7 +11,6 @@ import catalogue.Product;
 import debug.DEBUG;
 import middle.StockException;
 import middle.StockReader;
-
 import javax.swing.*;
 import java.sql.*;
 
@@ -178,7 +177,7 @@ public class StockR implements StockReader
       );
       if ( rs.next() )
       {
-        dt.setProductNum(rs.getInt( "productNo" ) + "");
+        dt.setProductNum(rs.getString( "productNo" ) + "");
         dt.setDescription(rs.getString( "description" ));
         dt.setPrice( rs.getDouble( "price" ) );
         dt.setQuantity( rs.getInt( "stockLevel" ) );
