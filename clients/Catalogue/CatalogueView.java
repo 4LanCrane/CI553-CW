@@ -25,17 +25,14 @@ public class CatalogueView implements Observer
         public static final String CLEAR  = "Clear";
     }
 
-    private static final int H = 300;       // Height of window pixels
-    private static final int W = 400;       // Width  of window pixels
+    private static final int H = 500;       // Height of window pixels
+    private static final int W = 600;       // Width  of window pixels
 
     private final JLabel      theAction  = new JLabel();
     private final JTextField  theInput   = new JTextField();
     private final JTextArea   theOutput  = new JTextArea();
     private final JScrollPane theSP      = new JScrollPane();
     private final JButton     theBtCheck = new JButton( Name.CHECK );
-    private final JButton     theBtClear = new JButton( Name.CLEAR );
-
-    private Picture thePicture = new Picture(80,80);
     private StockReader theStock   = null;
     private CatalogueController cont= null;
 
@@ -61,36 +58,34 @@ public class CatalogueView implements Observer
         cp.setLayout(null);                             // No layout manager
         rootWindow.setSize( W, H );                     // Size of Window
         rootWindow.setLocation( x, y );
+        cp.setBackground( Color.white );                // White back ground
 
-        Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
+        Font f = new Font("Monospaced",Font.PLAIN,25);  // Font f is
 
-        theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check button
+        theBtCheck.setBounds( 380, 50, 80, 40 );    // Check button
+        theBtCheck.setBackground(Color.GREEN);      // Green background
         theBtCheck.addActionListener(                   // Call back code
                 e -> cont.doCheckByName( theInput.getText() ) );
         cp.add( theBtCheck );                           //  Add to canvas
 
-        theBtClear.setBounds( 16, 25+60*1, 80, 40 );    // Clear button
-        theBtClear.addActionListener(                   // Call back code
-                e -> cont.doClear() );
-        cp.add( theBtClear );                           //  Add to canvas
 
-        theAction.setBounds( 110, 25 , 270, 20 );       // Message area
-        theAction.setText( "Please Enter The Product Name" );                        //  Blank
+        theAction.setBounds( 110, 25 , 360, 20 );       // Message area
+        theAction.setText( "Please Enter The Product Name Or Press Check To View All" );                        //  Blank
         cp.add( theAction );                            //  Add to canvas
 
         theInput.setBounds( 110, 50, 270, 40 );         // Product no area
         theInput.setText("");                           // Blank
+        theInput.setToolTipText("Enter Product Name Here"); // Hint
         cp.add( theInput );                             //  Add to canvas
 
-        theSP.setBounds( 110, 100, 270, 160 );          // Scrolling pane
+        theSP.setBounds( 1, 100, 585, 360 );// Scrolling pane
+        theSP.setBorder( BorderFactory.createLineBorder( Color.black,0 ) );//Hide the border
+        theOutput.setEditable( false );                 // Read only
         theOutput.setText( "" );                        //  Blank
-        theOutput.setFont( f );                         //  Uses font
+        theOutput.setFont( f );//  Uses font
         cp.add( theSP );                                //  Add to canvas
         theSP.getViewport().add( theOutput );           //  In TextArea
 
-        thePicture.setBounds( 16, 25+60*2, 80, 80 );   // Picture area
-        cp.add( thePicture );                           //  Add to canvas
-        thePicture.clear();
 
         rootWindow.setVisible( true );                  // Make visible);
         theInput.requestFocus();                        // Focus is here
@@ -117,14 +112,8 @@ public class CatalogueView implements Observer
         CatalogueModel model  = (CatalogueModel) modelC;
         String        message = (String) arg;
         theAction.setText( message );
-        ImageIcon image = model.getPicture();  // Image of product
-        if ( image == null )
-        {
-            thePicture.clear();                  // Clear picture
-        } else {
-            thePicture.set( image );             // Display picture
-        }
-        theOutput.setText( model.getBasket().getDetails() );
+        theOutput.setToolTipText("Results will show here");
+        theOutput.setText(model.getBasket().getDetailsNoTotal());
         theInput.requestFocus();               // Focus is here
     }
 

@@ -32,13 +32,7 @@ public class CatalogueController
         model.doCheckByName(pn);
     }
 
-    /**
-     * Clear interaction from view
-     */
-    public void doClear()
-    {
-        model.doClear();
-    }
+
 
 
 }

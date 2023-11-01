@@ -26,7 +26,7 @@ public class CatalogueModel extends Observable
 
     private StockReader     theStock     = null;
     private OrderProcessing theOrder     = null;
-    private ImageIcon       thePic       = null;
+
 
     /*
      * Construct the model of the Customer
@@ -91,26 +91,7 @@ public class CatalogueModel extends Observable
         notifyObservers(theAction);//  notify observers
     }
 
-    /**
-     * Clear the products from the basket
-     */
-    public void doClear()
-    {
-        String theAction = "";
-        theBasket.clear();                        // Clear s. list
-        theAction = "Enter Product Number";       // Set display
-        thePic = null;                            // No picture
-        setChanged(); notifyObservers(theAction);
-    }
 
-    /**
-     * Return a picture of the product
-     * @return An instance of an ImageIcon
-     */
-    public ImageIcon getPicture()
-    {
-        return thePic;
-    }
 
     /**
      * ask for update of view callled at start
