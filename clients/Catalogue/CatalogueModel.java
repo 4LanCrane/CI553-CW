@@ -9,6 +9,7 @@ import middle.StockException;
 import middle.StockReader;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -71,32 +72,36 @@ public class CatalogueModel extends Observable
         {
             if ( theStock.existsByName( pn ) )              // Stock Exists?
             {                                         // T
-                Product pr = theStock.getDetailsByName( pn ); //  Product
-                if ( pr.getQuantity() >= amount )       //  In stock?
-                {
-                    theAction =                           //   Display
-                            String.format( "%s : %7.2f (%2d) ", //
-                                    pr.getDescription(),              //    description
-                                    pr.getPrice(),                    //    price
-                                    pr.getQuantity() );               //    quantity
-                    pr.setQuantity( amount );             //   Require 1
-                    theBasket.add( pr );                  //   Add to basket
-                    thePic = theStock.getImage( pn );     //    product
-                } else {                                //  F
-                    theAction =                           //   Inform
-                            pr.getDescription() +               //    product not
-                                    " not in stock" ;                   //    in stock
+                ArrayList<Product> pr = theStock.getDetailsByName( pn ); //  Product
+                if (!pr.isEmpty()) {
+                    for (Product p : pr) {
+                        if (p.getQuantity() >= 1) {
+                            // Require 1
+                            p.setQuantity(1);
+                            //   Add to basket
+                            theBasket.add(p);
+                        } else {
+                            // Require 1
+                            p.setQuantity(0);
+                            // Add to basket
+                            theBasket.add(p);
+                        }
+                    }
+                    // Set display
+                    theAction = "Search results for  " + pn;
+                } else {
+                    // Inform Unknown product
+                    theAction = "No results found for " + pn;
                 }
-            } else {                                  // F
-                theAction =                             //  Inform Unknown
-                        "Unknown product number " + pn;       //  product number
+            } else {
+                // Inform Unknown product
+                theAction = "No results found for " + pn;
             }
-        } catch( StockException e )
-        {
-            DEBUG.error("CustomerClient.doCheck()\n%s",
-                    e.getMessage() );
+        } catch(StockException e) {
+            DEBUG.error("CustomerClient.doCheck()\n%s", e.getMessage());
         }
-        setChanged(); notifyObservers(theAction);
+        setChanged();
+        notifyObservers(theAction);
     }
 
     /**

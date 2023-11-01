@@ -73,7 +73,7 @@ public class CashierModel extends Observable
             String.format( "%s : %7.2f (%2d) ", //
               pr.getDescription(),              //    description
               pr.getPrice(),                    //    price
-              pr.getQuantity() );               //    quantity     
+              pr.getQuantity() );               //    quantity
           theProduct = pr;                      //   Remember prod.
           theProduct.setQuantity( amount );     //    & quantity
           theState = State.checked;             //   OK await BUY 
@@ -110,7 +110,7 @@ public class CashierModel extends Observable
         boolean stockBought =                   // Buy
           theStock.buyStock(                    //  however
             theProduct.getProductNum(),         //  may fail              
-            theProduct.getQuantity() );         //
+            theProduct.getQuantity());         //
         if ( stockBought )                      // Stock bought
         {                                       // T
           makeBasketIfReq();                    //  new Basket ?

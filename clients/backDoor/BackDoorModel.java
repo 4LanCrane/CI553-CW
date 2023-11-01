@@ -1,7 +1,6 @@
 package clients.backDoor;
 
 import catalogue.Basket;
-import catalogue.BetterBasket;
 import catalogue.Product;
 import debug.DEBUG;
 import middle.MiddleFactory;

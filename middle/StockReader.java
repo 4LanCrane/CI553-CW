@@ -3,6 +3,7 @@ package middle;
 import catalogue.Product;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
   * Interface for read access to the stock list.
@@ -35,7 +36,7 @@ public interface StockReader
   
   Product getDetails(String pNum) throws StockException;
 
-  Product getDetailsByName(String pDesc) throws StockException;
+  ArrayList<Product> getDetailsByName(String pDesc) throws StockException;
 
 
   
