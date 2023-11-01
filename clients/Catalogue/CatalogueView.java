@@ -75,7 +75,7 @@ public class CatalogueView implements Observer
         cp.add( theBtClear );                           //  Add to canvas
 
         theAction.setBounds( 110, 25 , 270, 20 );       // Message area
-        theAction.setText( "" );                        //  Blank
+        theAction.setText( "Please Enter The Product Name" );                        //  Blank
         cp.add( theAction );                            //  Add to canvas
 
         theInput.setBounds( 110, 50, 270, 40 );         // Product no area

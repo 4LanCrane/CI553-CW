@@ -111,7 +111,7 @@ public class F_StockR implements StockReader
   public synchronized ArrayList<Product> getDetailsByName(String name )
           throws StockException
   {
-    DEBUG.trace("F_StockR:getDetails()" );
+    DEBUG.trace("F_StockR:getDetailsByName()" );
     try
     {
       if ( aR_StockR == null ) connect();
@@ -119,7 +119,7 @@ public class F_StockR implements StockReader
     } catch ( RemoteException e )
     {
       aR_StockR = null;
-      throw new StockException( "Net: " + e.getMessage() );
+      throw new StockException( e.getMessage() );
     }
   }
 

@@ -34,6 +34,7 @@ public class StockR implements StockReader {
     /**
      * Connects to database
      * Uses a factory method to help setup the connection
+     *
      * @throws StockException if problem
      */
     public StockR()
@@ -59,6 +60,7 @@ public class StockR implements StockReader {
 
     /**
      * Returns a statement object that is used to process SQL statements
+     *
      * @return A statement object used to access the database
      */
 
@@ -69,6 +71,7 @@ public class StockR implements StockReader {
     /**
      * Returns a connection object that is used to process
      * requests to the DataBase
+     *
      * @return a connection object
      */
 
@@ -78,6 +81,7 @@ public class StockR implements StockReader {
 
     /**
      * Checks if the product exits in the stock list
+     *
      * @param pNum The product number
      * @return true if exists otherwise false
      */
@@ -99,27 +103,35 @@ public class StockR implements StockReader {
     }
 
 
-    public synchronized boolean existsByName(String pDesc)
+    /**
+     * Checks if the product exits in the stock list
+     *
+     * @param pName The product name
+     * @return true if exists otherwise false
+     * converts results into lowercase to allow for case-insensitive search as input from use is also converted to lowercase
+     */
+    public synchronized boolean existsByName(String pName)
             throws StockException {
 
         try {
             ResultSet rs = getStatementObject().executeQuery(
                     "select price from ProductTable " +
-                            "  where  LOWER(ProductTable.description) LIKE LOWER('%" + pDesc + "%')"
+                            "  where  LOWER(ProductTable.description) LIKE LOWER('%" + pName + "%')"
             );
             boolean res = rs.next();
             DEBUG.trace("DB StockR: exists(%s) -> %s",
-                    pDesc, (res ? "T" : "F"));
+                    pName, (res ? "T" : "F"));
             return res;
         } catch (SQLException e) {
-            throw new StockException("SQL exists: " + e.getMessage());
+            throw new StockException("SQL existsByName: " + e.getMessage());
         }
     }
 
 
     /**
      * Returns details about the product in the stock list.
-     *  Assumed to exist in database.
+     * Assumed to exist in database.
+     *
      * @param pNum The product number
      * @return Details in an instance of a Product
      */
@@ -146,16 +158,22 @@ public class StockR implements StockReader {
         }
     }
 
-    public synchronized ArrayList<Product> getDetailsByName(String pNam) throws StockException {
+
+    /**
+     * Returns details about the product in the stock list.
+     * @param pName The product name/Description
+     * @return Details in an arraylist of a Products
+     * converts results into lowercase to allow for case-insensitive search as input from use is also converted to lowercase
+     */
+    public synchronized ArrayList<Product> getDetailsByName(String pName) throws StockException {
         try {
+            ArrayList<Product> listOfproducts = new ArrayList<>();
             ResultSet resultSet = getStatementObject().executeQuery(
                     "SELECT * " +
                             "FROM ProductTable  " +
                             "INNER JOIN StockTable  " +
                             "ON ProductTable.productNo = StockTable.productNo " +
-                            "WHERE LOWER(ProductTable.description) LIKE LOWER('%" + pNam + "%')");
-
-            ArrayList<Product> listOfproducts = new ArrayList<>();
+                            "WHERE LOWER(ProductTable.description) LIKE LOWER('%" + pName + "%')");
 
             while (resultSet.next()) {
                 listOfproducts.add(
@@ -167,16 +185,18 @@ public class StockR implements StockReader {
                         )
                 );
             }
+            resultSet.close();
             return listOfproducts;
         } catch (SQLException e) {
-            throw new StockException("SQL getDetailsByName: " + e.getMessage());
+            throw new StockException("DB Access , Stock R , SQL getDetailsByName: " + e.getMessage());
         }
     }
 
     /**
      * Returns 'image' of the product
+     *
      * @param pNum The product number
-     *  Assumed to exist in database.
+     *             Assumed to exist in database.
      * @return ImageIcon representing the image
      */
     public synchronized ImageIcon getImage(String pNum)

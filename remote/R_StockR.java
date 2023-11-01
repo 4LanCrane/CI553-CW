@@ -42,10 +42,10 @@ public class      R_StockR
     return aStockR.exists( pNum );
   }
 
-  public synchronized boolean existsByName( String pNum )
+  public synchronized boolean existsByName( String pName )
           throws RemoteException, StockException
   {
-    return aStockR.existsByName( pNum );
+    return aStockR.existsByName( pName );
   }
 
   /**
@@ -60,10 +60,10 @@ public class      R_StockR
   }
 
 
-  public synchronized ArrayList<Product> getDetailsByName(String pNum )
+  public synchronized ArrayList<Product> getDetailsByName(String pName )
           throws RemoteException, StockException
   {
-    return aStockR.getDetailsByName( pNum );
+    return aStockR.getDetailsByName( pName );
   }
 
   /**

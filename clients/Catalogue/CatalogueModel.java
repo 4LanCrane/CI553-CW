@@ -62,46 +62,33 @@ public class CatalogueModel extends Observable
 
 
 
-    public void doCheckByName(String productName )
-    {
-        theBasket.clear();                          // Clear s. list
-        String theAction = "";
-        pn  = productName;                    // Product no.
-        int    amount  = 1;                         //  & quantity
-        try
-        {
-            if ( theStock.existsByName( pn ) )              // Stock Exists?
-            {                                         // T
-                ArrayList<Product> pr = theStock.getDetailsByName( pn ); //  Product
-                if (!pr.isEmpty()) {
-                    for (Product p : pr) {
-                        if (p.getQuantity() >= 1) {
-                            // Require 1
-                            p.setQuantity(1);
-                            //   Add to basket
-                            theBasket.add(p);
-                        } else {
-                            // Require 1
-                            p.setQuantity(0);
-                            // Add to basket
-                            theBasket.add(p);
+    public void doCheckByName(String productName ) {
+        String theAction = ""; //  set action to empty
+        theBasket.clear();         //clear basket
+        int amount = 1;            //  set amount to 1
+        try {
+            if (theStock.existsByName(productName))   //  check if product exists by name and returns boolean
+            {
+                ArrayList<Product> results = theStock.getDetailsByName(productName); //  store results of get details by name in arraylist
+                theAction = "Showing Results for " + productName;
+                if (!results.isEmpty()) {
+                    for (Product product : results) {
+                        if (product.getQuantity() >= 1) {//  check if product quantity is greater than or equal to 1
+                            product.setQuantity(amount);// add 1  of item to basket
+                            theBasket.add(product);// Add the produt to the basket
                         }
                     }
-                    // Set display
-                    theAction = "Search results for  " + pn;
                 } else {
-                    // Inform Unknown product
-                    theAction = "No results found for " + pn;
+                    theAction = "No Results for " + productName;//  if no results found
                 }
-            } else {
-                // Inform Unknown product
-                theAction = "No results found for " + pn;
+            }else {
+                    theAction = "No Results for " + productName;//  if no results found
             }
-        } catch(StockException e) {
-            DEBUG.error("CustomerClient.doCheck()\n%s", e.getMessage());
+        } catch (StockException e) {
+            DEBUG.error("CatalogueModel.doCheckByName()\n%s", e.getMessage());//  if error occurs
         }
-        setChanged();
-        notifyObservers(theAction);
+        setChanged();//
+        notifyObservers(theAction);//  notify observers
     }
 
     /**
