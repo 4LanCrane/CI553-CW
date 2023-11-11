@@ -131,7 +131,9 @@ public class CashierModel extends Observable
     setChanged(); notifyObservers(theAction);
   }
 
-
+  /**
+   * Clear the products from the basket and return items to stock
+   */
   public void doClearBasket() {
     try {
       for (Product pr : theBasket) {

@@ -32,7 +32,7 @@ public class CashierView implements Observer
   private final JTextArea   theOutput  = new JTextArea();
   private final JScrollPane theSP      = new JScrollPane();
   private final JButton     theBtCheck = new JButton( CHECK );
-  private final JButton     theBtBuy   = new JButton( ADD );
+  private final JButton     theBtAdd   = new JButton( ADD );
   private final JButton     theBtClear = new JButton( CLEAR);
 
   private final JButton     theBtBought= new JButton( BUY );
@@ -43,6 +43,12 @@ public class CashierView implements Observer
   private StockReadWriter theStock     = null;
   private OrderProcessing theOrder     = null;
   private CashierController cont       = null;
+  Color darkGreen = new Color(10, 128, 31);
+  Color darkRed = new Color(157, 45, 15);
+
+  Color darkOrange = new Color(178, 99, 13);
+
+  Color darkYellow = new Color(162, 162, 13);
   
   /**
    * Construct the view
@@ -71,21 +77,29 @@ public class CashierView implements Observer
     Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
 
     theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check Button
+    theBtCheck.setBackground( darkGreen );          //  Background color
+    theBtCheck.setForeground( Color.white );        //  Text colour
     theBtCheck.addActionListener(                   // Call back code
       e -> cont.doCheck( theInput.getText(),Integer.parseInt(String.valueOf(theAmount.getValue()))));
     cp.add( theBtCheck );                           //  Add to canvas
 
-    theBtBuy.setBounds( 16, 25+60*1, 80, 40 );      // Buy button 
-    theBtBuy.addActionListener(                     // Call back code
+    theBtAdd.setBounds( 16, 25+60*1, 80, 40 );      // Buy button
+    theBtAdd.setBackground( darkOrange );           //  Background color
+    theBtAdd.setForeground( Color.white );          //  Text colour
+    theBtAdd.addActionListener(                     // Call back code
       e -> cont.doBuy() );
-    cp.add( theBtBuy );                             //  Add to canvas
+    cp.add( theBtAdd );                             //  Add to canvas
 
     theBtClear.setBounds( 16, 25+60*2, 80, 40 );    // Clear Button
+    theBtClear.setBackground( darkRed );            //  Background color
+    theBtClear.setForeground( Color.white );        //  Text colour
     theBtClear.addActionListener(                   // Call back code
       e -> cont.doClear() );
     cp.add( theBtClear );                           //  Add to canvas
 
     theBtBought.setBounds( 16, 25+60*3, 80, 40 );   // Clear Button
+    theBtBought.setBackground( darkYellow );        //  Background color
+    theBtBought.setForeground( Color.white );       //  Text colour
     theBtBought.addActionListener(                  // Call back code
       e -> cont.doBought() );
     cp.add( theBtBought );                          //  Add to canvas
@@ -99,9 +113,9 @@ public class CashierView implements Observer
     cp.add( theInput );
 
     theAmountLabel.setBounds( 390, 25 , 270, 20 );// label Prompt for product no
-    cp.add( theAmountLabel );
-    theAmount.setBounds(380,50,60,40);
-    cp.add(theAmount);//  Add to canvas
+    cp.add( theAmountLabel );// add amount label to canvas
+    theAmount.setBounds(380,50,60,40);// input spinner for amount
+    cp.add(theAmount);// add amount spinner to canvas
 
     theSP.setBounds( 110, 100, 270, 160 );          // Scrolling pane
     theOutput.setText( "" );                        //  Blank

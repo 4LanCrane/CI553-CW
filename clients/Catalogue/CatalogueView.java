@@ -36,6 +36,8 @@ public class CatalogueView implements Observer
     private StockReader theStock   = null;
     private CatalogueController cont= null;
 
+    Color darkGreen = new Color(10, 128, 31);  // Dark green for check button
+
     /**
      * Construct the view
      * @param rpc   Window in which to construct
@@ -63,7 +65,8 @@ public class CatalogueView implements Observer
         Font f = new Font("Monospaced",Font.PLAIN,25);  // Font f is
 
         theBtCheck.setBounds( 380, 50, 80, 40 );    // Check button
-        theBtCheck.setBackground(Color.GREEN);      // Green background
+        theBtCheck.setBackground(darkGreen);      // darkGreen background
+        theBtCheck.setForeground(Color.white);    // White text
         theBtCheck.addActionListener(                   // Call back code
                 e -> cont.doCheckByName( theInput.getText() ) );
         cp.add( theBtCheck );                           //  Add to canvas

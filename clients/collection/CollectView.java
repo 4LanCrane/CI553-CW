@@ -29,6 +29,7 @@ public class CollectView implements Observer
  
   private OrderProcessing   theOrder = null;
   private CollectController cont     = null;
+    Color darkGreen = new Color(10, 128, 31);
 
   /**
    * Construct the view
@@ -55,6 +56,8 @@ public class CollectView implements Observer
     Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
 
     theBtCollect.setBounds( 16, 25+60*0, 80, 40 );  // Check Button
+      theBtCollect.setBackground(darkGreen);
+        theBtCollect.setForeground(Color.white);
     theBtCollect.addActionListener(                 // Call back code
       e -> cont.doCollect( theInput.getText()) );
     cp.add( theBtCollect );                         //  Add to canvas

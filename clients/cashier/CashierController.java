@@ -47,6 +47,9 @@ public class CashierController
     model.doBought();
   }
 
+  /**
+   * Clear interaction from view
+   */
   public void doClear() {model.doClearBasket();}
 }
 

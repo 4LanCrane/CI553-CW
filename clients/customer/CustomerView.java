@@ -30,6 +30,9 @@ public class CustomerView implements Observer
   private static final int H = 300;       // Height of window pixels
   private static final int W = 470;       // Width  of window pixels
 
+  Color darkGreen = new Color(10, 128, 31);
+  Color darkRed = new Color(157, 45, 15);
+
   private final JLabel      theAction  = new JLabel();
 
   private final JLabel      theInputLabel  = new JLabel("Please enter the product number:"); //label for input
@@ -72,11 +75,15 @@ public class CustomerView implements Observer
     Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
 
     theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check button
+    theBtCheck.setBackground(darkGreen);// Background dark green
+    theBtCheck.setForeground(Color.white);          //  Text white
     theBtCheck.addActionListener(                   // Call back code
       e -> cont.doCheck( theInput.getText(), Integer.parseInt(String.valueOf(theAmount.getValue()))) );
     cp.add( theBtCheck );                           //  Add to canvas
 
     theBtClear.setBounds( 16, 25+60*1, 80, 40 );// Clear button
+    theBtClear.setBackground(darkRed);// Background dark red
+    theBtClear.setForeground(Color.white);          //  Text white
     theBtClear.addActionListener(                   // Call back code
       e -> cont.doClear() );
     cp.add( theBtClear );                           //  Add to canvas
